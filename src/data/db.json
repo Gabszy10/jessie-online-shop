@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Demon Slayer",
+      "img": "https://wallpaperaccess.com/full/2277559.jpg",
+      "price": 1299
+    },
+    {
+      "id": 2,
+      "title": "Demon Slayer",
+      "img": "https://wallpaperaccess.com/full/2277559.jpg",
+      "price": 1299
+    },
+    {
+      "id": 3,
+      "title": "Demon Slayer",
+      "img": "https://wallpaperaccess.com/full/2277559.jpg",
+      "price": 1299
+    },
+    {
+      "id": 4,
+      "title": "Demon Slayer",
+      "img": "https://wallpaperaccess.com/full/2277559.jpg",
+      "price": 1299
+    }
+  ]
+}
