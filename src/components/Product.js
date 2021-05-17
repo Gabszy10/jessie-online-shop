@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#202d36",
     color: "white",
     "&:hover": { backgroundColor: "#05464b" },
+    fontFamily: "Otaku, Arial, serif; !important",
+    fontWeight: "bold",
+    fontSize:'1rem'
   },
   media: {
     height: 80,
@@ -34,14 +37,16 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "0",
   },
   cartTitle: {
-    fontSize: "1.7rem",
-    fontWeight: "400",
+    fontSize: "1.3rem",
+    fontWeight: "bold",
     marginBottom: "0",
+    fontFamily: "Otaku, Arial, serif; !important",
   },
   priceTitle: {
-    fontSize: "1.5rem",
-    fontWeight: "400",
+    fontSize: "1.3rem",
+    fontWeight: "bold",
     marginBottom: "0",
+    fontFamily: "Otaku, Arial, serif; !important",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -75,8 +80,8 @@ const Product = (props) => {
           title={props.product.title}
         />
         <CardContent className={classes.background}>
-          <Typography className={classes.cartTitle} variant="h4" gutterBottom>
-            Demon Slayer
+          <Typography className={classes.cartTitle} variant="h5" gutterBottom>
+            Demon Slayer Action Figure #1
           </Typography>
           <hr />
           <Typography className={classes.priceTitle} variant="h4" gutterBottom>

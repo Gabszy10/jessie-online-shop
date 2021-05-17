@@ -11,9 +11,9 @@ import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { NavLink } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    fontSize: "1rem",
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
+    fontFamily: "Naruto, Arial, serif; !important",
   },
   search: {
     position: "relative",
@@ -160,9 +162,11 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Jessie's Anime Shop
-          </Typography>
+          <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Jessie's Anime Shop
+            </Typography>
+          </NavLink>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -178,7 +182,7 @@ const Navbar = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton
+            {/* <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -187,7 +191,15 @@ const Navbar = () => {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
+            <Button color="inherit" style={{ fontSize: "1.4rem" }}>
+              <NavLink
+                to="/login"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                Login
+              </NavLink>
+            </Button>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

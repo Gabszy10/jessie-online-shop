@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ToastContainer, Flip } from "react-toastify";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Login from "./pages/Auth";
 
 function App(props) {
   return (
@@ -13,9 +14,8 @@ function App(props) {
       <ToastContainer autoClose={3000} transition={Flip} />
       <Navbar />
       <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </BrowserRouter>
   );

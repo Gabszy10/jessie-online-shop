@@ -2,9 +2,24 @@
   color: #ff7129 !important;
 }
 
+* {
+  font-family: "Otaku";
+  font-weight: bold;
+}
+
 html,
 body,
 #app,
 #app > div {
   height: 100%;
+}
+
+@font-face {
+  font-family: "Naruto";
+  src: local("Naruto"), url(./assets/fonts/njnaruto.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Otaku";
+  src: local("Otaku"), url(./assets/fonts/OtakuRant.ttf) format("truetype");
 }
