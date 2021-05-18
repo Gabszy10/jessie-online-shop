@@ -5,6 +5,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import WelcomeImage from "../components/WelcomeImage";
 import logo from "../assets/images/goku.png";
+import bg from "../assets/images/login-bg.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,12 +41,12 @@ function Auth() {
           style={{
             backgroundColor: "white",
             border: "3px solid #ff7129;",
-            minHeight: "600px",
+            minHeight: "550px",
             borderRadius: "20px",
           }}
         >
           <div className={classes.form}>
-            <Grid container style={{ height: "500px" }}>
+            <Grid container style={{ height: "550px" }}>
               <Grid item md={6}>
                 <WelcomeImage />
               </Grid>
@@ -54,7 +55,7 @@ function Auth() {
                 md={6}
                 style={{
                   backgroundImage:
-                    "url('https://cdn.wallpapersafari.com/5/72/FUGVQy.jpg')",
+                    `url(${bg})`,
                   backgroundSize: "cover",
                   borderRadius: "0px 20px 20px 0px",
                 }}

@@ -20,7 +20,7 @@ function Slider(props) {
         {items.map((item, i) => (
           <img
             src={item.url}
-            style={{ width: "100%", objectFit: "cover", maxHeight: "300px" }}
+            style={{ width: "100%", objectFit: "cover", maxHeight: "280px" }}
           />
         ))}
       </Carousel>
