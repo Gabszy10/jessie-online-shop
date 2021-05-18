@@ -26,13 +26,6 @@ function Auth() {
   const classes = useStyles();
   const [login, setLogin] = useState(true);
 
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  }
-
   return (
     <>
       <Container style={{ maxWidth: "1200px", marginTop: "2rem" }}>
@@ -41,12 +34,12 @@ function Auth() {
           style={{
             backgroundColor: "white",
             border: "3px solid #ff7129;",
-            minHeight: "550px",
+            minHeight: "570px",
             borderRadius: "20px",
           }}
         >
           <div className={classes.form}>
-            <Grid container style={{ height: "550px" }}>
+            <Grid container style={{ height: "570px" }}>
               <Grid item md={6}>
                 <WelcomeImage />
               </Grid>
@@ -54,22 +47,51 @@ function Auth() {
                 item
                 md={6}
                 style={{
-                  backgroundImage:
-                    `url(${bg})`,
+                  backgroundImage: `url(${bg})`,
                   backgroundSize: "cover",
                   borderRadius: "0px 20px 20px 0px",
                 }}
               >
-                <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                <div style={{ textAlign: "center", marginTop: "1rem" }}>
                   <img
                     src={logo}
-                    height="150"
-                    width="200"
+                    height="100"
+                    width="150"
                     style={{
                       marginBottom: "2rem",
                     }}
                   />
-                  <Login />
+                  {login ? (
+                    <>
+                      {" "}
+                      <Login />
+                      <h3 style={{ color: "white" }}>
+                        Don't have an account?
+                        <span
+                          style={{ color: "#ff7129", cursor: "pointer" }}
+                          onClick={() => setLogin(false)}
+                        >
+                          {" "}
+                          Sign up
+                        </span>
+                      </h3>{" "}
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <Register />
+                      <h3 style={{ color: "white" }}>
+                        Already have an account?
+                        <span
+                          style={{ color: "#ff7129", cursor: "pointer" }}
+                          onClick={() => setLogin(true)}
+                        >
+                          {" "}
+                          Sign in
+                        </span>
+                      </h3>{" "}
+                    </>
+                  )}
                 </div>
               </Grid>
             </Grid>

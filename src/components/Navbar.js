@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -14,6 +13,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import { toast } from "react-toastify";
+
+const userStorage = localStorage.getItem("user") || undefined;
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -86,11 +88,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(undefined);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(undefined);
+  const [user, setUser] = useState(undefined);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  useEffect(() => {
+    if (userStorage) {
+      setUser(userStorage);
+    }
+  }, [userStorage]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -120,8 +129,18 @@ const Navbar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={() => toast.success("This feature is coming soon!")}>
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          localStorage.removeItem("user");
+          setUser(undefined);
+        }}
+      >
+        Logout
+      </MenuItem>
     </Menu>
   );
 
@@ -182,24 +201,27 @@ const Navbar = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {/* <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton> */}
-            <Button color="inherit" style={{ fontSize: "1.4rem" }}>
-              <NavLink
-                to="/login"
-                style={{ color: "white", textDecoration: "none" }}
+            {user ? (
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
               >
-                Login
-              </NavLink>
-            </Button>
+                <AccountCircle />
+              </IconButton>
+            ) : (
+              <Button color="inherit" style={{ fontSize: "1.4rem" }}>
+                <NavLink
+                  to="/login"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Login
+                </NavLink>
+              </Button>
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

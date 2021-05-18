@@ -7,6 +7,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
+import { users } from "../data/db.json";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +41,7 @@ function Login() {
     password: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
+  const history = useHistory();
 
   const isValid = () => {
     setIsFormInvalid(true);
@@ -51,7 +54,18 @@ function Login() {
 
   const handleSubmit = async () => {
     if (isValid()) {
-      toast.success("Success");
+      const found = users.filter((user) => user.email === userData.email);
+      if (found.length) {
+        if (found[0].password === userData.password) {
+          localStorage.setItem("user", found);
+          toast.success("Logged in succesfully");
+          window.location.href = "/";
+        } else {
+          toast.error("Email and Password does not match, Please try again");
+        }
+      } else {
+        toast.error("User doesn't exist , Please try again");
+      }
     }
   };
 
@@ -61,7 +75,7 @@ function Login() {
 
   return (
     <>
-      <form action="">
+      <form autoComplete="off">
         <TextField
           InputLabelProps={{
             style: { color: "#fff" },
@@ -85,7 +99,9 @@ function Login() {
             },
           }}
           error={isFormInvalid && !userData.email}
-          helperText={isFormInvalid && !userData.email ? "Empty field!" : " "}
+          helperText={
+            isFormInvalid && !userData.email ? "Email cannot be empty!" : " "
+          }
           onChange={(e) => handleChange(e)}
         />
 
@@ -113,7 +129,9 @@ function Login() {
           }}
           error={isFormInvalid && !userData.password}
           helperText={
-            isFormInvalid && !userData.password ? "Empty field!" : " "
+            isFormInvalid && !userData.password
+              ? "Password cannot be empty!"
+              : " "
           }
           onChange={(e) => handleChange(e)}
         />
@@ -124,6 +142,7 @@ function Login() {
             justifyContent: "space-between",
             width: "70%",
             margin: "auto",
+            marginBottom: "1rem",
           }}
         >
           <FormControlLabel
@@ -132,7 +151,7 @@ function Login() {
           />
 
           <h3
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", color: "#29d7ff" }}
             onClick={() => toast.success("Coming soon !")}
           >
             Forgot password?
@@ -148,7 +167,7 @@ function Login() {
           style={{
             backgroundColor: "#ff7129",
             fontSize: "1rem",
-            marginBottom: "2rem",
+            marginBottom: "1rem",
             borderRadius: "20px",
             width: "70%",
           }}

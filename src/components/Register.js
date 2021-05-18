@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   notchedOutline: {
     borderWidth: "2px",
-    borderColor: "#ff7129 !important",
+    borderColor: "#ccc !important",
   },
   notchedErrorOutline: {
     borderWidth: "3px",
@@ -30,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 function Register() {
   const classes = useStyles();
   const [userData, setUserData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -37,7 +45,7 @@ function Register() {
 
   const isValid = () => {
     setIsFormInvalid(true);
-    if (!userData.email || !userData.password) {
+    if (!userData.name || !userData.email || !userData.password) {
       return false;
     }
 
@@ -46,7 +54,26 @@ function Register() {
 
   const handleSubmit = async () => {
     if (isValid()) {
-      toast.success("Success");
+      try {
+        console.log(userData);
+        const res = await axios.get("http://localhost:3001/users");
+        if (res.data.some((user) => userData.email === user.email)) {
+          return toast.error("Email already exist , Please try again");
+        }
+        await axios.post("http://localhost:3001/users", {
+          id: uuidv4(),
+          ...userData,
+        });
+        setUserData({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setIsFormInvalid(false);
+        toast.success("User registered successfully!");
+      } catch (error) {
+        toast.error("Something went wrong, Please try again.");
+      }
     }
   };
 
@@ -59,39 +86,49 @@ function Register() {
       <form action="">
         <TextField
           InputLabelProps={{
-            style: { color: "#ff7129" },
+            style: { color: "#fff" },
           }}
           id="outlined-adornment"
-          label="Full Name"
+          label="Name"
           variant="outlined"
           color="primary"
-          style={{ width: "70%", marginBottom: "1rem" }}
+          style={{ width: "70%" }}
+          value={userData.name}
           type="text"
           name="name"
           InputProps={{
+            style: {
+              color: "#fff",
+            },
             classes: {
               notchedOutline:
-                isFormInvalid && !userData.email
+                isFormInvalid && !userData.name
                   ? classes.notchedErrorOutline
                   : classes.notchedOutline,
             },
           }}
-          error={isFormInvalid && !userData.email}
-          helperText={isFormInvalid && !userData.email ? "Empty field!" : " "}
+          error={isFormInvalid && !userData.name}
+          helperText={
+            isFormInvalid && !userData.name ? "Name cannot be empty!" : " "
+          }
           onChange={(e) => handleChange(e)}
         />
         <TextField
           InputLabelProps={{
-            style: { color: "#ff7129" },
+            style: { color: "#fff" },
           }}
           id="outlined-adornment"
           label="Email"
           variant="outlined"
           color="primary"
-          style={{ width: "70%", marginBottom: "1rem" }}
+          style={{ width: "70%" }}
+          value={userData.email}
           type="email"
           name="email"
           InputProps={{
+            style: {
+              color: "#fff",
+            },
             classes: {
               notchedOutline:
                 isFormInvalid && !userData.email
@@ -100,22 +137,28 @@ function Register() {
             },
           }}
           error={isFormInvalid && !userData.email}
-          helperText={isFormInvalid && !userData.email ? "Empty field!" : " "}
+          helperText={
+            isFormInvalid && !userData.email ? "Email cannot be empty!" : " "
+          }
           onChange={(e) => handleChange(e)}
         />
 
         <TextField
           InputLabelProps={{
-            style: { color: "#ff7129" },
+            style: { color: "#fff" },
           }}
           id="outlined-adornment"
           label="Password"
           variant="outlined"
           color="primary"
-          style={{ width: "70%", marginBottom: "1rem" }}
+          style={{ width: "70%" }}
+          value={userData.password}
           type="password"
           name="password"
           InputProps={{
+            style: {
+              color: "#fff",
+            },
             classes: {
               notchedOutline:
                 isFormInvalid && !userData.password
@@ -125,10 +168,31 @@ function Register() {
           }}
           error={isFormInvalid && !userData.password}
           helperText={
-            isFormInvalid && !userData.password ? "Empty field!" : " "
+            isFormInvalid && !userData.password
+              ? "Password cannot be empty!"
+              : " "
           }
           onChange={(e) => handleChange(e)}
         />
+        <div
+          style={{
+            color: "white",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "70%",
+            margin: "auto",
+          }}
+        >
+          <FormControlLabel
+            control={<Checkbox style={{ color: "white" }} />}
+            label={
+              <span>
+                I have read and agree to the{" "}
+                <span style={{ color: "#29d7ff" }}>Terms of Service</span>
+              </span>
+            }
+          />
+        </div>
       </form>
 
       <div>
@@ -139,10 +203,13 @@ function Register() {
           style={{
             backgroundColor: "#ff7129",
             fontSize: "1rem",
-            marginBottom: "2rem",
+            marginTop: "1rem",
+            marginBottom: "1rem",
+            borderRadius: "20px",
+            width: "70%",
           }}
         >
-          Create Account
+          CREATE ACCOUNT
         </Button>
       </div>
     </>

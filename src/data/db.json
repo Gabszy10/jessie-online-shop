@@ -24,5 +24,37 @@
       "img": "https://wallpaperaccess.com/full/2277559.jpg",
       "price": 1299
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Jessie Battad",
+      "email": "jessie@gmail.com",
+      "password": "12345"
+    },
+    {
+      "name": "Nhiko Matanguihan",
+      "email": "nhiko@gmail.com",
+      "password": "1233",
+      "id": 3
+    },
+    {
+      "id": "c7b482d4-613a-43d6-82b4-660cb60dc3b3",
+      "name": "Edward Cueto",
+      "email": "edward@gmail.com",
+      "password": "1233"
+    },
+    {
+      "id": "c11e81b5-84db-4f45-95ec-0b5a189eda8f",
+      "name": "Edward Cueto",
+      "email": "edward24@gmail.com",
+      "password": "1233"
+    },
+    {
+      "id": "36535bf9-4227-45fc-83d5-21f5690b2797",
+      "name": "Mandingo",
+      "email": "mandigo@gmail.com",
+      "password": "123"
+    }
   ]
 }
