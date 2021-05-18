@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Auth";
 import Cart from "./pages/Cart";
-import Footer from "./components/Footer";
+import "./assets/styles/Footer.css";
 
 function App(props) {
   return (
@@ -25,7 +25,6 @@ function App(props) {
         <Route path="/login" exact component={Login} />
         <Route path="/cart" exact component={Cart} />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }
