@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
 
@@ -19,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   notchedOutline: {
     borderWidth: "2px",
-    borderColor: "#ff7129 !important",
+    borderColor: "#ccc !important",
   },
   notchedErrorOutline: {
     borderWidth: "3px",
@@ -59,16 +64,19 @@ function Login() {
       <form action="">
         <TextField
           InputLabelProps={{
-            style: { color: "#ff7129" },
+            style: { color: "#fff" },
           }}
           id="outlined-adornment"
           label="Email"
           variant="outlined"
           color="primary"
-          style={{ width: "70%", marginBottom: "1rem" }}
+          style={{ width: "70%" }}
           type="email"
           name="email"
           InputProps={{
+            style: {
+              color: "#fff",
+            },
             classes: {
               notchedOutline:
                 isFormInvalid && !userData.email
@@ -83,16 +91,19 @@ function Login() {
 
         <TextField
           InputLabelProps={{
-            style: { color: "#ff7129" },
+            style: { color: "#fff" },
           }}
           id="outlined-adornment"
           label="Password"
           variant="outlined"
           color="primary"
-          style={{ width: "70%", marginBottom: "1rem" }}
+          style={{ width: "70%" }}
           type="password"
           name="password"
           InputProps={{
+            style: {
+              color: "#fff",
+            },
             classes: {
               notchedOutline:
                 isFormInvalid && !userData.password
@@ -106,6 +117,27 @@ function Login() {
           }
           onChange={(e) => handleChange(e)}
         />
+        <div
+          style={{
+            color: "white",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "70%",
+            margin: "auto",
+          }}
+        >
+          <FormControlLabel
+            control={<Checkbox style={{ color: "white" }} />}
+            label="Remember me"
+          />
+
+          <h3
+            style={{ cursor: "pointer" }}
+            onClick={() => toast.success("Coming soon !")}
+          >
+            Forgot password?
+          </h3>
+        </div>
       </form>
 
       <div>
@@ -117,6 +149,8 @@ function Login() {
             backgroundColor: "#ff7129",
             fontSize: "1rem",
             marginBottom: "2rem",
+            borderRadius: "20px",
+            width: "70%",
           }}
         >
           Login

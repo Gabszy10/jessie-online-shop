@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Tabs, Tab, AppBar, Box } from "@material-ui/core";
+import { Container, Tabs, Tab, AppBar, Box, Grid } from "@material-ui/core";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import WelcomeImage from "../components/WelcomeImage";
+import logo from "../assets/images/goku.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: 200,
     },
+  },
+  form: {
+    flexGrow: 1,
   },
   tab: {
     background: "#ff7129",
@@ -29,72 +34,45 @@ function Auth() {
 
   return (
     <>
-      <Container style={{ maxWidth: "700px", marginTop: "2rem" }}>
-        <AppBar position="static" color="default">
-          <Tabs
-            TabIndicatorProps={{ style: { backgroundColor: "#00ffdc" } }}
-            value={login}
-            onChange={() => "haha"}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="full width tabs example"
-            className={classes.tab}
-            style={{ maxWidth: "700px" }}
-          >
-            <Tab
-              label="Register"
-              {...a11yProps(2)}
-              onClick={() => setLogin(0)}
-              style={{ color: "white", fontSize: "1.2rem" }}
-            />
-            <Tab
-              label="Login"
-              {...a11yProps(1)}
-              onClick={() => setLogin(1)}
-              style={{ color: "white", fontSize: "1.2rem" }}
-            />
-          </Tabs>
-        </AppBar>
-
+      <Container style={{ maxWidth: "1200px", marginTop: "2rem" }}>
         <Box
           boxShadow={100}
-          style={{ backgroundColor: "white", border: "3px solid #ff7129;" }}
+          style={{
+            backgroundColor: "white",
+            border: "3px solid #ff7129;",
+            minHeight: "600px",
+            borderRadius: "20px",
+          }}
         >
-          {login ? (
-            <h1
-              style={{
-                textAlign: "center",
-                color: "#ff7129",
-                margin: "0",
-                paddingTop: "1rem",
-                fontSize: "2.5rem",
-              }}
-            >
-              Sign in with
-            </h1>
-          ) : (
-            <h1
-              style={{
-                textAlign: "center",
-                color: "#ff7129",
-                margin: "0",
-                paddingTop: "1rem",
-                fontSize: "2.5rem",
-              }}
-            >
-              Sign up with
-            </h1>
-          )}
-
-          <form
-            className={classes.form}
-            noValidate
-            autoComplete="off"
-            style={{ textAlign: "center", marginTop: "20px" }}
-          >
-            {login ? <Login /> : <Register />}
-          </form>
+          <div className={classes.form}>
+            <Grid container style={{ height: "500px" }}>
+              <Grid item md={6}>
+                <WelcomeImage />
+              </Grid>
+              <Grid
+                item
+                md={6}
+                style={{
+                  backgroundImage:
+                    "url('https://cdn.wallpapersafari.com/5/72/FUGVQy.jpg')",
+                  backgroundSize: "cover",
+                  borderRadius: "0px 20px 20px 0px",
+                }}
+              >
+                <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                  <img
+                    src={logo}
+                    height="150"
+                    width="200"
+                    style={{
+                      marginBottom: "2rem",
+                    }}
+                  />
+                  <Login />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
         </Box>
       </Container>
     </>
