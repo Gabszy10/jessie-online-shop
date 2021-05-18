@@ -12,6 +12,10 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Box, Button } from "@material-ui/core";
+import toast from "../customToast";
+import { useHistory } from "react-router";
+
+const userStorage = localStorage.getItem("user") || undefined;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": { backgroundColor: "#05464b" },
     fontFamily: "Otaku, Arial, serif; !important",
     fontWeight: "bold",
-    fontSize:'1rem'
+    fontSize: "1rem",
   },
   media: {
     height: 80,
@@ -65,10 +69,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Product = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleAddToCart = (product) => {
+    if (!userStorage) {
+      history.push("/login");
+      return toast.error("You must be logged in to perform this action");
+    }
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex((item) => item.id === product.id);
+    if (index > -1) {
+      cart[index]["qty"] += 1;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success(" Item is added to cart ✅");
   };
 
   return (
@@ -94,6 +116,7 @@ const Product = (props) => {
             color="default"
             className={classes.button}
             startIcon={<ShoppingCartIcon />}
+            onClick={() => handleAddToCart(props.product)}
           >
             Add To Cart
           </Button>

@@ -202,16 +202,26 @@ const Navbar = () => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {user ? (
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              <>
+                <Button color="inherit" style={{ fontSize: "1.4rem" }}>
+                  <NavLink
+                    to="/cart"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    MY CART
+                  </NavLink>
+                </Button>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </>
             ) : (
               <Button color="inherit" style={{ fontSize: "1.4rem" }}>
                 <NavLink

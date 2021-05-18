@@ -6,7 +6,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { toast } from "react-toastify";
+import toast from "../customToast";
 import { users } from "../data/db.json";
 import { useHistory } from "react-router-dom";
 
@@ -61,10 +61,10 @@ function Login() {
           toast.success("Logged in succesfully");
           window.location.href = "/";
         } else {
-          toast.error("Email and Password does not match, Please try again");
+          toast.error("Email and Password does not match ❌");
         }
       } else {
-        toast.error("User doesn't exist , Please try again");
+        toast.error("User doesn't exist ❌");
       }
     }
   };

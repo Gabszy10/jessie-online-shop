@@ -28,7 +28,7 @@ function Auth() {
 
   return (
     <>
-      <Container style={{ maxWidth: "1200px", marginTop: "2rem" }}>
+      <Container style={{ maxWidth: "1200px", margin: "2rem 0px 2rem 0rem" }}>
         <Box
           boxShadow={100}
           style={{
