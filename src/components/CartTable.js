@@ -199,7 +199,7 @@ export default function CartTable({ pages }) {
         </Table>
       </TableContainer>
 
-      {cart.length && (
+      {!!cart.length && (
         <>
           <div
             style={{

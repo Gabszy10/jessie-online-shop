@@ -2,26 +2,26 @@
   "products": [
     {
       "id": 1,
-      "title": "Demon Slayer ASA",
+      "title": "Demon Slayer Poster",
       "img": "https://wallpaperaccess.com/full/2277559.jpg",
-      "price": 1299
+      "price": 1099
     },
     {
       "id": 2,
-      "title": "Demon Slayer AAA",
-      "img": "https://wallpaperaccess.com/full/2277559.jpg",
-      "price": 1299
+      "title": "Rengoku Flame Poster",
+      "img": "https://www.kolpaper.com/wp-content/uploads/2021/04/Rengoku-Wallpapers-7.jpg",
+      "price": 1099
     },
     {
       "id": 3,
-      "title": "Demon Slayer",
-      "img": "https://wallpaperaccess.com/full/2277559.jpg",
-      "price": 1299
+      "title": "Goku Multiform Poster",
+      "img": "https://image.winudf.com/v2/image/Y29tLmRic3dhbGxwYXBlci5mb3Jnb2t1bXVpX3NjcmVlbl8wXzE1MjQ3MTQyMzdfMDI3/screen-0.jpg?fakeurl=1&type=.jpg",
+      "price": 1099
     },
     {
       "id": 4,
-      "title": "Demon Slayer",
-      "img": "https://wallpaperaccess.com/full/2277559.jpg",
+      "title": "Naruto vs Sasuke Poster",
+      "img": "https://images.alphacoders.com/605/thumb-1920-605592.png",
       "price": 1299
     }
   ],

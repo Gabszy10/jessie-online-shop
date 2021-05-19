@@ -103,7 +103,7 @@ const Product = (props) => {
         />
         <CardContent className={classes.background}>
           <Typography className={classes.cartTitle} variant="h5" gutterBottom>
-            Demon Slayer Action Figure #1
+            {props.product.title}
           </Typography>
           <hr />
           <Typography className={classes.priceTitle} variant="h4" gutterBottom>

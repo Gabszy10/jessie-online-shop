@@ -12,7 +12,7 @@ import {
   TableRow,
   TextField,
 } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Checkout() {
   const classes = useStyles();
+  const history = useHistory();
   const [userData, setUserData] = useState({
     receiver: "",
     phone: "",
@@ -99,6 +100,7 @@ export default function Checkout() {
 
   const handleSubmit = async () => {
     if (isValid()) {
+      history.push("/payment");
     }
   };
 
