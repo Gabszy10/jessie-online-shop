@@ -98,7 +98,6 @@ const Product = (props) => {
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          // image={props.product.img}
           image={require(`../assets/images/products/${props.product.img}`).default}
           title={props.product.title}
         />
