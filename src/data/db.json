@@ -23,6 +23,30 @@
       "title": "Naruto vs Sasuke Poster",
       "img": "https://images.alphacoders.com/605/thumb-1920-605592.png",
       "price": 1299
+    },
+    {
+      "id": 5,
+      "title": "Sakuragi Dunk Anime Figure",
+      "img": "https://www.senseitoy.com/image/catalog/M3/sakuragi/slam-dunk-sakuragi-resin-statue-by-m3-studio-06.jpg",
+      "price": 14999
+    },
+    {
+      "id": 5,
+      "title": "Luffy Anime Figure",
+      "img": "https://cf.shopee.co.th/file/e3264a1facc4ff612a1bbf27184d293a",
+      "price": 1299
+    },
+    {
+      "id": 5,
+      "title": "Ghost Fighter Poster",
+      "img": "https://hinetcdn.waca.ec/uploads/shops/11712/products/5e/5ea041fbd5d9b4f003bf9d5bc893dd9f.jpg",
+      "price": 1299
+    },
+    {
+      "id": 5,
+      "title": "Tekken 7 Poster",
+      "img": "https://c4.wallpaperflare.com/wallpaper/798/97/312/tekken-7-wallpaper-preview.jpg",
+      "price": 1299
     }
   ],
   "users": [
