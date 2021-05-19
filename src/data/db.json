@@ -2,13 +2,13 @@
   "products": [
     {
       "id": 1,
-      "title": "Demon Slayer",
+      "title": "Demon Slayer ASA",
       "img": "https://wallpaperaccess.com/full/2277559.jpg",
       "price": 1299
     },
     {
       "id": 2,
-      "title": "Demon Slayer",
+      "title": "Demon Slayer AAA",
       "img": "https://wallpaperaccess.com/full/2277559.jpg",
       "price": 1299
     },

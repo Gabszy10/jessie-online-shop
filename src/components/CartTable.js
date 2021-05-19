@@ -12,6 +12,7 @@ import { formatNumber } from "../helper";
 import customToast from "../customToast";
 import { Button, Container } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import bg from "../assets/images/login-bg.jpg";
 
 const useStyles = makeStyles({
   table: {
@@ -19,6 +20,8 @@ const useStyles = makeStyles({
     background: "#202d36",
     margin: "auto",
     textAlign: "center",
+    backgroundImage: `url(${bg})`,
+   
   },
   dangerIcon: {
     color: "#1fcbdc",
@@ -29,11 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-export default function CartTable() {
+export default function CartTable({ pages }) {
   const classes = useStyles();
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -257,7 +256,12 @@ export default function CartTable() {
                   width: "100%",
                 }}
               >
-                Continue
+                <NavLink
+                  to="/checkout"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Continue
+                </NavLink>
               </Button>
             </div>
           </div>

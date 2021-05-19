@@ -9,8 +9,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Auth";
 import Cart from "./pages/Cart";
 import "./assets/styles/Footer.css";
+import Checkout from "./pages/Checkout";
 
-function App(props) {
+function App() {
   return (
     <BrowserRouter>
       <Navbar />
@@ -26,6 +27,7 @@ function App(props) {
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/cart" exact component={Cart} />
+        <Route path="/checkout" exact component={Checkout} />
       </Switch>
     </BrowserRouter>
   );

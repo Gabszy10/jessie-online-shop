@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Product from "../components/Product";
 import Slider from "../components/Slider";
 import { products } from "../data/db.json";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ export default function Home() {
   return (
     <>
       <Slider />
-      <div className={classes.root}>
+      <Container className={classes.root}>
         <Grid container spacing={3}>
           {products.map((item) => (
             <Grid item xs={12} sm={6} md={3}>
@@ -33,7 +34,7 @@ export default function Home() {
             </Grid>
           ))}
         </Grid>
-      </div>
+      </Container>
     </>
   );
 }
