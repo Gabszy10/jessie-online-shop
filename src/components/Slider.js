@@ -14,7 +14,7 @@ function Slider(props) {
     },
     {
       name: "Random Name #2",
-      url: "https://cdn.wallpapersafari.com/23/29/vfwr3p.jpg",
+      url: "https://wallpapercave.com/uwp/uwp943060.jpeg",
     },
   ];
 
