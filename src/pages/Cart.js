@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "../components/Slider";
 import BreadCrumbs from "../components/BreadCrumbs";
+import CartTable from "../components/CartTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,7 @@ export default function Cart() {
     <>
       <div className={classes.root}>
         <BreadCrumbs />
+        <CartTable />
       </div>
     </>
   );

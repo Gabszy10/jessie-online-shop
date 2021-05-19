@@ -13,13 +13,15 @@ import "./assets/styles/Footer.css";
 function App(props) {
   return (
     <BrowserRouter>
+      <Navbar />
       <ToastContainer
         autoClose={3000}
         transition={Flip}
         className="toast-container"
         toastClassName="dark-toast"
+        position="bottom-right"
       />
-      <Navbar />
+
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
