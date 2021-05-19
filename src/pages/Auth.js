@@ -58,7 +58,7 @@ function Auth() {
                     height="100"
                     width="150"
                     style={{
-                      marginBottom: "2rem",
+                      marginBottom: "1.5rem",
                     }}
                   />
                   {login ? (

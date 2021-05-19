@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "unset",
     backgroundColor: "#171b24",
     borderRadius: "20px",
-    marginTop: "1rem",
     textAlign: "center",
     padding: "2rem 0 2rem 0",
     boxShadow: "6px 10px 13px -3px rgba(0,0,0,0.75)",
@@ -67,8 +66,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Checkout() {
   const classes = useStyles();
   const [userData, setUserData] = useState({
-    email: "",
-    password: "",
+    receiver: "",
+    phone: "",
+    address: "",
+    city: "",
+    zip: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
   const [cart, setCart] = useState([]);
@@ -79,6 +81,30 @@ export default function Checkout() {
     computeTotal(cartStorage);
     setCart(cartStorage);
   }, []);
+
+  const isValid = () => {
+    setIsFormInvalid(true);
+    if (
+      !userData.receiver ||
+      !userData.phone ||
+      !userData.address ||
+      !userData.city ||
+      !userData.zip
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (isValid()) {
+    }
+  };
+
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
 
   const computeTotal = (items) => {
     const getTotal = items.reduce((n, { price, qty }) => n + price * qty, 0);
@@ -119,9 +145,9 @@ export default function Checkout() {
                   label="Receiver Name"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
-                  name="name"
+                  name="receiver"
                   helperText=" "
                   InputProps={{
                     style: {
@@ -129,18 +155,18 @@ export default function Checkout() {
                     },
                     classes: {
                       notchedOutline:
-                        isFormInvalid && !userData.password
+                        isFormInvalid && !userData.receiver
                           ? classes.notchedErrorOutline
                           : classes.notchedOutline,
                     },
                   }}
-                  error={isFormInvalid && !userData.password}
+                  error={isFormInvalid && !userData.receiver}
                   helperText={
-                    isFormInvalid && !userData.password
-                      ? "Password cannot be empty!"
+                    isFormInvalid && !userData.receiver
+                      ? "Receiver name cannot be empty!"
                       : " "
                   }
-                  //   onChange={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
 
                 <TextField
@@ -151,9 +177,9 @@ export default function Checkout() {
                   label="Contact Number"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
-                  name="name"
+                  name="phone"
                   helperText=" "
                   InputProps={{
                     style: {
@@ -161,18 +187,18 @@ export default function Checkout() {
                     },
                     classes: {
                       notchedOutline:
-                        isFormInvalid && !userData.password
+                        isFormInvalid && !userData.phone
                           ? classes.notchedErrorOutline
                           : classes.notchedOutline,
                     },
                   }}
-                  error={isFormInvalid && !userData.password}
+                  error={isFormInvalid && !userData.phone}
                   helperText={
-                    isFormInvalid && !userData.password
-                      ? "Password cannot be empty!"
+                    isFormInvalid && !userData.phone
+                      ? "Contact Number cannot be empty!"
                       : " "
                   }
-                  //   onChange={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
 
                 <TextField
@@ -183,7 +209,7 @@ export default function Checkout() {
                   label="Address"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="address"
                   helperText=" "
@@ -193,18 +219,18 @@ export default function Checkout() {
                     },
                     classes: {
                       notchedOutline:
-                        isFormInvalid && !userData.password
+                        isFormInvalid && !userData.address
                           ? classes.notchedErrorOutline
                           : classes.notchedOutline,
                     },
                   }}
-                  error={isFormInvalid && !userData.password}
+                  error={isFormInvalid && !userData.address}
                   helperText={
-                    isFormInvalid && !userData.password
-                      ? "Password cannot be empty!"
+                    isFormInvalid && !userData.address
+                      ? "Address cannot be empty!"
                       : " "
                   }
-                  //   onChange={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
 
                 <TextField
@@ -215,9 +241,9 @@ export default function Checkout() {
                   label="Town / City"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
-                  name="address"
+                  name="city"
                   helperText=" "
                   InputProps={{
                     style: {
@@ -225,18 +251,18 @@ export default function Checkout() {
                     },
                     classes: {
                       notchedOutline:
-                        isFormInvalid && !userData.password
+                        isFormInvalid && !userData.city
                           ? classes.notchedErrorOutline
                           : classes.notchedOutline,
                     },
                   }}
-                  error={isFormInvalid && !userData.password}
+                  error={isFormInvalid && !userData.city}
                   helperText={
-                    isFormInvalid && !userData.password
-                      ? "Password cannot be empty!"
+                    isFormInvalid && !userData.city
+                      ? "City cannot be empty!"
                       : " "
                   }
-                  //   onChange={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
 
                 <TextField
@@ -247,9 +273,9 @@ export default function Checkout() {
                   label="Post Code / Zip"
                   variant="outlined"
                   color="primary"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
-                  name="address"
+                  name="zip"
                   helperText=" "
                   InputProps={{
                     style: {
@@ -257,18 +283,18 @@ export default function Checkout() {
                     },
                     classes: {
                       notchedOutline:
-                        isFormInvalid && !userData.password
+                        isFormInvalid && !userData.zip
                           ? classes.notchedErrorOutline
                           : classes.notchedOutline,
                     },
                   }}
-                  error={isFormInvalid && !userData.password}
+                  error={isFormInvalid && !userData.zip}
                   helperText={
-                    isFormInvalid && !userData.password
-                      ? "Password cannot be empty!"
+                    isFormInvalid && !userData.zip
+                      ? "Zip Code cannot be empty!"
                       : " "
                   }
-                  //   onChange={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
               </form>
             </Container>
@@ -354,16 +380,9 @@ export default function Checkout() {
                   width: "60%",
                   marginTop: "2rem",
                 }}
+                onClick={handleSubmit}
               >
-                <NavLink
-                  to="/checkout"
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                >
-                  Continue
-                </NavLink>
+                Continue
               </Button>
             </div>
           </Grid>

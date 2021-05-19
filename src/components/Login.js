@@ -41,7 +41,6 @@ function Login() {
     password: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
-  const history = useHistory();
 
   const isValid = () => {
     setIsFormInvalid(true);
@@ -84,7 +83,7 @@ function Login() {
           label="Email"
           variant="outlined"
           color="primary"
-          style={{ width: "70%" }}
+          style={{ width: "70%", marginBottom: "0.3rem" }}
           type="email"
           name="email"
           InputProps={{
@@ -113,7 +112,7 @@ function Login() {
           label="Password"
           variant="outlined"
           color="primary"
-          style={{ width: "70%" }}
+          style={{ width: "70%", marginBottom: "0.3rem" }}
           type="password"
           name="password"
           InputProps={{

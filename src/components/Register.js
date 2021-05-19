@@ -92,7 +92,7 @@ function Register() {
           label="Name"
           variant="outlined"
           color="primary"
-          style={{ width: "70%" }}
+          style={{ width: "70%", marginBottom: "0.3rem" }}
           value={userData.name}
           type="text"
           name="name"
@@ -121,7 +121,7 @@ function Register() {
           label="Email"
           variant="outlined"
           color="primary"
-          style={{ width: "70%" }}
+          style={{ width: "70%", marginBottom: "0.3rem" }}
           value={userData.email}
           type="email"
           name="email"
@@ -151,7 +151,7 @@ function Register() {
           label="Password"
           variant="outlined"
           color="primary"
-          style={{ width: "70%" }}
+          style={{ width: "70%", marginBottom: "0.3rem" }}
           value={userData.password}
           type="password"
           name="password"
