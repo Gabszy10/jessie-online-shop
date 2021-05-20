@@ -175,14 +175,6 @@ const Navbar = () => {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.navBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography className={classes.title} variant="h6" noWrap>
               Jessie's Anime Shop
