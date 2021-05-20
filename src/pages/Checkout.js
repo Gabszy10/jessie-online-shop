@@ -100,7 +100,8 @@ export default function Checkout() {
 
   const handleSubmit = async () => {
     if (isValid()) {
-      history.push("/payment");
+      localStorage.setItem("user_info", JSON.stringify(userData));
+      // history.push("/payment");
     }
   };
 

@@ -41,7 +41,7 @@ function Auth() {
           <div className={classes.form}>
             <Grid container style={{ height: "570px" }}>
               <Grid item md={6}>
-                <WelcomeImage />
+                {/* <WelcomeImage /> */}
               </Grid>
               <Grid
                 item

@@ -10,6 +10,7 @@ import Login from "./pages/Auth";
 import Cart from "./pages/Cart";
 import "./assets/styles/Footer.css";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/cart" exact component={Cart} />
         <Route path="/checkout" exact component={Checkout} />
+        <Route path="/payment" exact component={Payment} />
       </Switch>
     </BrowserRouter>
   );
