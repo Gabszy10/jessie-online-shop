@@ -13,7 +13,9 @@ import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Box, Button } from "@material-ui/core";
 import toast from "../customToast";
+import bg from "../assets/images/login-bg.jpg";
 import { useHistory } from "react-router";
+import { formatNumber } from "../helper";
 
 const userStorage = localStorage.getItem("user") || undefined;
 
@@ -24,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
-    backgroundColor: "#202d36",
+    backgroundColor: "#ff7129",
     color: "white",
-    "&:hover": { backgroundColor: "#05464b" },
+    "&:hover": { backgroundColor: "#29d7ff" },
     fontFamily: "Otaku, Arial, serif; !important",
     fontWeight: "bold",
     fontSize: "1rem",
@@ -37,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
   background: {
     backgroundColor: "#ff7129",
+    backgroundImage: `url(${bg})`,
+    backgroundSize: "cover",
     color: "white",
     paddingBottom: "0",
   },
@@ -45,12 +49,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: "0",
     fontFamily: "Otaku, Arial, serif; !important",
+    fontKerning: "none",
   },
   priceTitle: {
     fontSize: "1.3rem",
     fontWeight: "bold",
     marginBottom: "0",
     fontFamily: "Otaku, Arial, serif; !important",
+    fontKerning: "none",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -98,39 +104,47 @@ const Product = (props) => {
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          image={require(`../assets/images/products/${props.product.img}`).default}
+          image={
+            require(`../assets/images/products/${props.product.img}`).default
+          }
           title={props.product.title}
         />
-        <CardContent className={classes.background}>
-          <Typography className={classes.cartTitle} variant="h5" gutterBottom>
-            {props.product.title}
-          </Typography>
-          <hr />
-          <Typography className={classes.priceTitle} variant="h4" gutterBottom>
-            P{props.product.price}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing className={classes.background}>
-          <Button
-            variant="contained"
-            color="default"
-            className={classes.button}
-            startIcon={<ShoppingCartIcon />}
-            onClick={() => handleAddToCart(props.product)}
-          >
-            Add To Cart
-          </Button>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon style={{ color: "white" }} />
-          </IconButton>
-        </CardActions>
+        <div className={classes.background}>
+          <CardContent>
+            <Typography className={classes.cartTitle} variant="h5" gutterBottom>
+              {props.product.title}
+            </Typography>
+            <hr />
+            <Typography
+              className={classes.priceTitle}
+              variant="h4"
+              gutterBottom
+            >
+              P{formatNumber(props.product.price)}
+            </Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <Button
+              variant="contained"
+              color="default"
+              className={classes.button}
+              startIcon={<ShoppingCartIcon />}
+              onClick={() => handleAddToCart(props.product)}
+            >
+              Add To Cart
+            </Button>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon style={{ color: "white" }} />
+            </IconButton>
+          </CardActions>
+        </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Product Details:</Typography>
