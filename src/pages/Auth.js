@@ -54,7 +54,7 @@ function Auth() {
               >
                 <div style={{ textAlign: "center", marginTop: "1rem" }}>
                   <img
-                    src={logo}
+                    // src={logo}
                     height="100"
                     width="150"
                     style={{
