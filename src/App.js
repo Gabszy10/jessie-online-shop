@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import "./assets/styles/Footer.css";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
+import Confirm from "./pages/Confirm";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/cart" exact component={Cart} />
         <Route path="/checkout" exact component={Checkout} />
         <Route path="/payment" exact component={Payment} />
+        <Route path="/order/confirm/:id" exact component={Confirm} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Breadcrumbs,
   Button,
@@ -14,14 +15,16 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TextField,
 } from "@material-ui/core";
-import { NavLink, useHistory } from "react-router-dom";
+import toast from "../customToast";
 import HomeIcon from "@material-ui/icons/Home";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import bg from "../assets/images/login-bg.jpg";
 import { formatNumber } from "../helper";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,6 +96,40 @@ export default function Payment() {
 
   const handleSubmit = async () => {
     if (!payment) {
+      return toast.error("Please select payment method ❌");
+    }
+
+    try {
+      const user = JSON.parse(localStorage.getItem("user")) || null;
+      let today = new Date();
+      let dd = today.getDate();
+      let mm = today.getMonth() + 1;
+      const yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      today = mm + "-" + dd + "-" + yyyy;
+      const orderNumber = uuidv4();
+      await axios.post("http://localhost:3001/orders", {
+        id: orderNumber,
+        user_id: user.id,
+        order_date: today,
+        receiver: userData.receiver,
+        phone: userData.phone,
+        address: `${userData.address} ${userData.city} ${userData.zip}`,
+        payment_method: payment,
+      });
+      toast.success("Order processed succesfully");
+      localStorage.clear("user_cart");
+      localStorage.clear("user_info");
+      history.push(`/order/confirm/${orderNumber}`);
+    } catch (error) {
+      toast.error("Something went wrong, Please try again.");
     }
   };
 
@@ -123,6 +160,10 @@ export default function Payment() {
           <NavLink to="/checkout" color="inherit" className={classes.link}>
             <WhatshotIcon className={classes.icon} />
             Checkout
+          </NavLink>
+          <NavLink to="/checkout" color="inherit" className={classes.link}>
+            <LocalAtmIcon className={classes.icon} />
+            Payment
           </NavLink>
         </Breadcrumbs>
 

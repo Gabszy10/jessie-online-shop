@@ -130,7 +130,7 @@ export default function CartTable({ pages }) {
                     align="center"
                   >
                     <img
-                      // src={require(`../assets/images/products/${row.img}`).default}
+                      src={require(`../assets/images/products/${row.img}`).default}
                       height="75"
                       width="80"
                       style={{ objectFit: "cover" }}

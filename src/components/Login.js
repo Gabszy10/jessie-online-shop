@@ -56,7 +56,7 @@ function Login() {
       const found = users.filter((user) => user.email === userData.email);
       if (found.length) {
         if (found[0].password === userData.password) {
-          localStorage.setItem("user", found);
+          localStorage.setItem("user", JSON.stringify(found[0]));
           toast.success("Logged in succesfully");
           window.location.href = "/";
         } else {

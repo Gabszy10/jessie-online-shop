@@ -81,5 +81,51 @@
       "password": "123"
     }
   ],
-  "cart": []
+  "orders": [
+    {
+      "id": "19de4098-8aa9-4d28-ae5e-2700b84131bd",
+      "user_id": 1,
+      "order_date": "05-20-2021",
+      "receiver": "Jessie Boy",
+      "phone": "+639655821448",
+      "address": "107 Agoncillio St Batangas, Philippines 4222",
+      "payment_method": "Paymaya"
+    },
+    {
+      "id": "128830b9-450e-41f8-a62a-fe81828cd99b",
+      "user_id": 1,
+      "order_date": "05-20-2021",
+      "receiver": "Gabrielle Cordero",
+      "phone": "+639655821448",
+      "address": "107 Agoncillio St Batangas, Philippines 4222",
+      "payment_method": "Gcash"
+    },
+    {
+      "id": "fe46ff85-bb36-4232-8661-9683f18efca7",
+      "user_id": 1,
+      "order_date": "05-20-2021",
+      "receiver": "Gucci Pusa",
+      "phone": "+639655821448",
+      "address": "107 Agoncillio St Batangas, Philippines 4222",
+      "payment_method": "Bank Transfer"
+    },
+    {
+      "id": "ab87c170-aabe-4eb5-a35c-21bcdbe373e7",
+      "user_id": 1,
+      "order_date": "05-20-2021",
+      "receiver": "Gucci Pusa",
+      "phone": "+639655821448",
+      "address": "107 Agoncillio St Batangas, Philippines 4222",
+      "payment_method": "Bank Transfer"
+    },
+    {
+      "id": "9e0a9b48-1d45-4535-89a6-9e1801c3366c",
+      "user_id": 1,
+      "order_date": "05-20-2021",
+      "receiver": "Nhiko Jin",
+      "phone": "+639655821448",
+      "address": "107 Agoncillio St Batangas, Philippines 4222",
+      "payment_method": "Paymaya"
+    }
+  ]
 }

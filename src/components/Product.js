@@ -17,8 +17,6 @@ import bg from "../assets/images/login-bg.jpg";
 import { useHistory } from "react-router";
 import { formatNumber } from "../helper";
 
-const userStorage = localStorage.getItem("user") || undefined;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     transition: "transform 0.15s ease-in-out",
@@ -83,6 +81,7 @@ const Product = (props) => {
   };
 
   const handleAddToCart = (product) => {
+    const userStorage = localStorage.getItem("user") || undefined;
     if (!userStorage) {
       history.push("/login");
       return toast.error("You must be logged in to perform this action");

@@ -11,7 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { toast } from "react-toastify";
 
@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(undefined);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(undefined);
   const [user, setUser] = useState(undefined);
@@ -136,6 +137,7 @@ const Navbar = () => {
         onClick={() => {
           handleMenuClose();
           localStorage.removeItem("user");
+          history.push("/");
           setUser(undefined);
         }}
       >

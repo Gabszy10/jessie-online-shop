@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Slider /> */}
+      <Slider />
       <Container className={classes.root}>
         <Grid container spacing={3}>
           {products.map((item) => (
