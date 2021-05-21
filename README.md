@@ -72,3 +72,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Run Mock API
 
 json-server --watch src/data/db.json --port 3001
+
+### Emojis
+❌ ✅

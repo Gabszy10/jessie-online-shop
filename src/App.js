@@ -13,6 +13,8 @@ import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import Confirm from "./pages/Confirm";
 import AdminHome from "./pages/AdminHome";
+import AdminSidebar from "./components/AdminSidebar";
+import ManageUsers from "./components/Admin/User/ManageUsers";
 
 const RouteWithNavbar = ({ exact, path, component: Component, ...rest }) => {
   return (
@@ -50,7 +52,8 @@ function App() {
         <RouteWithNavbar path="/checkout" exact component={Checkout} />
         <RouteWithNavbar path="/payment" exact component={Payment} />
         <RouteWithNavbar path="/order/confirm/:id" exact component={Confirm} />
-        <Route path="/admin" exact component={AdminHome} />
+        <AdminSidebar path="/admin" exact component={AdminHome} />
+        <AdminSidebar path="/admin/users" exact component={ManageUsers} />
       </Switch>
     </BrowserRouter>
   );

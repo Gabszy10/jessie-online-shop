@@ -70,9 +70,9 @@ function Register() {
           password: "",
         });
         setIsFormInvalid(false);
-        toast.success("User registered successfully!");
+        toast.success("User registered successfully! ✅");
       } catch (error) {
-        toast.error("Something went wrong, Please try again.");
+        toast.error("Something went wrong, Please try again. ❌");
       }
     }
   };
