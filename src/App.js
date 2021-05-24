@@ -15,6 +15,8 @@ import Confirm from "./pages/Confirm";
 import AdminHome from "./pages/AdminHome";
 import AdminSidebar from "./components/AdminSidebar";
 import ManageUsers from "./components/Admin/User/ManageUsers";
+import ManageProducts from "./components/Admin/Product/ManageProducts";
+import ManageOrders from "./components/Admin/Order/ManageOrders";
 
 const RouteWithNavbar = ({ exact, path, component: Component, ...rest }) => {
   return (
@@ -33,7 +35,6 @@ const RouteWithNavbar = ({ exact, path, component: Component, ...rest }) => {
     />
   );
 };
-
 function App() {
   return (
     <BrowserRouter>
@@ -54,6 +55,8 @@ function App() {
         <RouteWithNavbar path="/order/confirm/:id" exact component={Confirm} />
         <AdminSidebar path="/admin" exact component={AdminHome} />
         <AdminSidebar path="/admin/users" exact component={ManageUsers} />
+        <AdminSidebar path="/admin/products" exact component={ManageProducts} />
+        <AdminSidebar path="/admin/orders" exact component={ManageOrders} />
       </Switch>
     </BrowserRouter>
   );

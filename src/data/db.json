@@ -126,6 +126,15 @@
       "phone": "+639655821448",
       "address": "107 Agoncillio St Batangas, Philippines 4222",
       "payment_method": "Paymaya"
+    },
+    {
+      "id": "70d65877-9815-4700-83f2-3796b7ca6c15",
+      "user_id": 1,
+      "order_date": "05-21-2021",
+      "receiver": "sffsf",
+      "phone": "442321312",
+      "address": "dasda fafaw 1234",
+      "payment_method": "Paymaya"
     }
   ]
 }

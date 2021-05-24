@@ -59,7 +59,7 @@ export default function Confirm(props) {
   const fetchOrder = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/orders/${props.match.params.id}`
+        `https://myproject03.azurewebsites.net/api/orders/${props.match.params.id}`
       );
       setOrderDetails(res.data);
     } catch (error) {}

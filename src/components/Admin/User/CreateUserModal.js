@@ -42,15 +42,40 @@ export default function CreateUserModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: {
+      value: "",
+      error: "",
+    },
+    email: {
+      value: "",
+      error: "",
+    },
+    password: {
+      value: "",
+      error: "",
+    },
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
 
   const isValid = () => {
     setIsFormInvalid(true);
-    if (!userData.email || !userData.name || !userData.password) {
+    var re = /\S+@\S+\.\S+/;
+    if (!userData.password.value || !userData.name.value) {
+      return false;
+    }
+    if (!userData.email.value) {
+      setUserData({
+        ...userData,
+        email: { ...userData.email, error: "Email cannot be empty!" },
+      });
+      return false;
+    }
+
+    if (!re.test(userData.email.value)) {
+      setUserData({
+        ...userData,
+        email: { ...userData.email, error: "Email must be valid email!" },
+      });
       return false;
     }
 
@@ -60,10 +85,11 @@ export default function CreateUserModal(props) {
   const handleSubmit = async () => {
     if (isValid()) {
       try {
-        await axios.post(
-          `https://myproject03.azurewebsites.net/api/users`,
-          userData
-        );
+        await axios.post(`https://myproject03.azurewebsites.net/api/users`, {
+          name: userData.name.value,
+          email: userData.email.value,
+          password: userData.password.value,
+        });
         closeModal();
         refetch();
         customToast.success("User created succesfully. ✅");
@@ -80,7 +106,10 @@ export default function CreateUserModal(props) {
   };
 
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setUserData({
+      ...userData,
+      [e.target.name]: { value: e.target.value, error: "" },
+    });
   };
 
   return (
@@ -114,21 +143,21 @@ export default function CreateUserModal(props) {
                 style={{ width: "80%", marginBottom: "0.3rem" }}
                 type="text"
                 name="name"
-                value={userData.name}
+                value={userData.name.value}
                 InputProps={{
                   style: {
                     color: "#fff",
                   },
                   classes: {
                     notchedOutline:
-                      isFormInvalid && !userData.name
+                      isFormInvalid && !userData.name.value
                         ? classes.notchedErrorOutline
                         : classes.notchedOutline,
                   },
                 }}
-                error={isFormInvalid && !userData.email}
+                error={isFormInvalid && !userData.name.value}
                 helperText={
-                  isFormInvalid && !userData.email
+                  isFormInvalid && !userData.name.value
                     ? "Name cannot be empty!"
                     : " "
                 }
@@ -145,22 +174,22 @@ export default function CreateUserModal(props) {
                 style={{ width: "80%", marginBottom: "0.3rem" }}
                 type="email"
                 name="email"
-                value={userData.email}
+                value={userData.email.value}
                 InputProps={{
                   style: {
                     color: "#fff",
                   },
                   classes: {
                     notchedOutline:
-                      isFormInvalid && !userData.email
+                      isFormInvalid && userData.email.error
                         ? classes.notchedErrorOutline
                         : classes.notchedOutline,
                   },
                 }}
-                error={isFormInvalid && !userData.email}
+                error={isFormInvalid && userData.email.error}
                 helperText={
-                  isFormInvalid && !userData.email
-                    ? "Email cannot be empty!"
+                  isFormInvalid && userData.email.error
+                    ? userData.email.error
                     : " "
                 }
                 onChange={(e) => handleChange(e)}
@@ -177,21 +206,21 @@ export default function CreateUserModal(props) {
                 style={{ width: "80%", marginBottom: "0.3rem" }}
                 type="password"
                 name="password"
-                value={userData.password}
+                value={userData.password.value}
                 InputProps={{
                   style: {
                     color: "#fff",
                   },
                   classes: {
                     notchedOutline:
-                      isFormInvalid && !userData.password
+                      isFormInvalid && !userData.password.value
                         ? classes.notchedErrorOutline
                         : classes.notchedOutline,
                   },
                 }}
-                error={isFormInvalid && !userData.password}
+                error={isFormInvalid && !userData.password.value}
                 helperText={
-                  isFormInvalid && !userData.password
+                  isFormInvalid && !userData.password.value
                     ? "Password cannot be empty!"
                     : " "
                 }

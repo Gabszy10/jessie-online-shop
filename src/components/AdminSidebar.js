@@ -15,11 +15,9 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { Button } from "@material-ui/core";
-import { NavLink, Route } from "react-router-dom";
-import { AccountCircle } from "@material-ui/icons";
+import { NavLink, Route, useHistory } from "react-router-dom";
+import { AccountCircle, BorderColor, ShoppingCart } from "@material-ui/icons";
+import { Menu, MenuItem } from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -116,8 +114,26 @@ export default function AdminSidebar({
   ...rest
 }) {
   const classes = useStyles();
+  const history = useHistory();
+  const [anchorEl, setAnchorEl] = React.useState(undefined);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(undefined);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,6 +142,55 @@ export default function AdminSidebar({
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          localStorage.removeItem("user");
+          history.push("/");
+        }}
+      >
+        Logout
+      </MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+  console.log(isMenuOpen);
 
   return (
     <Route
@@ -164,9 +229,9 @@ export default function AdminSidebar({
                       <IconButton
                         edge="end"
                         aria-label="account of current user"
-                        // aria-controls={menuId}
+                        aria-controls={menuId}
                         aria-haspopup="true"
-                        // onClick={handleProfileMenuOpen}
+                        onClick={handleProfileMenuOpen}
                         color="inherit"
                       >
                         <AccountCircle />
@@ -174,6 +239,8 @@ export default function AdminSidebar({
                     </>
                   </div>
                 </Toolbar>
+                {renderMobileMenu}
+                {renderMenu}
               </AppBar>
               <Drawer
                 variant="permanent"
@@ -199,25 +266,51 @@ export default function AdminSidebar({
                 </div>
                 <Divider />
                 <List>
-                  {["Manage Users", "Manage Products", "Manage Orders"].map(
-                    (text, index) => (
-                      <ListItem button key={text}>
-                        <ListItemIcon>
-                          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <AccountCircle />
+                    </ListItemIcon>
 
-                        <NavLink
-                          to="/admin/users"
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                          }}
-                        >
-                          <ListItemText primary={text} />
-                        </NavLink>
-                      </ListItem>
-                    )
-                  )}
+                    <NavLink
+                      to="/admin/users"
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                      }}
+                    >
+                      <ListItemText primary="Manage Users" />
+                    </NavLink>
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <BorderColor />
+                    </ListItemIcon>
+
+                    <NavLink
+                      to="/admin/products"
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                      }}
+                    >
+                      <ListItemText primary="Manage Products" />
+                    </NavLink>
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <ShoppingCart />
+                    </ListItemIcon>
+
+                    <NavLink
+                      to="/admin/orders"
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                      }}
+                    >
+                      <ListItemText primary="Manage Orders" />
+                    </NavLink>
+                  </ListItem>
                 </List>
                 <Divider />
               </Drawer>

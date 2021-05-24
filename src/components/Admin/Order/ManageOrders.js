@@ -11,8 +11,8 @@ import customToast from "../../../customToast";
 import { Button, Container } from "@material-ui/core";
 import bg from "../../../assets/images/login-bg.jpg";
 import axios from "axios";
-import UpdateProductModal from "./UpdateProductModal";
-import CreateProductModal from "./CreateProductModal";
+import UpdateProductModal from "./UpdateOrderModal";
+import CreateProductModal from "./CreateOrderModal";
 
 const useStyles = makeStyles({
   table: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ManageProducts({ pages }) {
+export default function ManageOrders({ pages }) {
   const classes = useStyles();
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -42,13 +42,13 @@ export default function ManageProducts({ pages }) {
   const [productToUpdate, setproductToUpdate] = useState();
 
   useEffect(() => {
-    fetchproducts();
+    fetchOrders();
   }, []);
 
-  const fetchproducts = async () => {
+  const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        "https://myproject03.azurewebsites.net/api/products"
+        "https://myproject03.azurewebsites.net/api/orders"
       );
       if (res.data) {
         setProducts(res.data);
@@ -74,20 +74,6 @@ export default function ManageProducts({ pages }) {
     setIsOpen(false);
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      try {
-        await axios.delete(
-          `https://myproject03.azurewebsites.net/api/products/${id}`
-        );
-        fetchproducts();
-        customToast.success("Product succesfully deleted ✅");
-      } catch (error) {
-        customToast.success("Something went wrong, Please try again ❌");
-      }
-    }
-  };
-
   const renderModal = () => {
     if (action === "EDIT") {
       return (
@@ -95,7 +81,7 @@ export default function ManageProducts({ pages }) {
           isOpen={isOpen}
           closeModal={closeModal}
           product={productToUpdate}
-          refetch={fetchproducts}
+          refetch={fetchOrders}
         />
       );
     } else if (action === "CREATE") {
@@ -104,7 +90,7 @@ export default function ManageProducts({ pages }) {
           isOpen={isOpen}
           closeModal={closeModal}
           product={productToUpdate}
-          refetch={fetchproducts}
+          refetch={fetchOrders}
         />
       );
     }
@@ -119,19 +105,6 @@ export default function ManageProducts({ pages }) {
           marginTop: "1rem",
         }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          style={{
-            backgroundColor: "#ff7129",
-            borderRadius: "20px",
-            width: "30%",
-          }}
-          onClick={handleCreate}
-        >
-          Create Product
-        </Button>
-
         <TableContainer
           component={Paper}
           style={{
@@ -166,78 +139,73 @@ export default function ManageProducts({ pages }) {
                   style={{ color: "white", borderBottom: "none" }}
                   align="center"
                 >
-                  Title
+                  Order Number
                 </TableCell>
                 <TableCell
                   style={{ color: "white", borderBottom: "none" }}
                   align="center"
                 >
-                  Price
+                  Receiver Name
                 </TableCell>
                 <TableCell
                   style={{ color: "white", borderBottom: "none" }}
                   align="center"
-                  colSpan={2}
                 >
-                  Action
+                  Phone
+                </TableCell>
+                <TableCell
+                  style={{ color: "white", borderBottom: "none" }}
+                  align="center"
+                >
+                  Payment Method
+                </TableCell>
+                <TableCell
+                  style={{ color: "white", borderBottom: "none" }}
+                  align="center"
+                >
+                  Created Date
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product) => (
+              {products.map((order, i) => (
                 <TableRow>
                   <TableCell
                     style={{ color: "white", borderBottom: "none" }}
                     align="center"
                   >
-                    {product.id}
+                    {i}
                   </TableCell>
                   <TableCell
                     style={{ color: "white", borderBottom: "none" }}
                     align="center"
                   >
-                    {product.title}
+                    JS-{order.id}00
                   </TableCell>
                   <TableCell
                     style={{ color: "white", borderBottom: "none" }}
                     align="center"
                   >
-                    {product.price}
+                    {order.receiver}
                   </TableCell>
                   <TableCell
                     style={{ color: "white", borderBottom: "none" }}
                     align="center"
                   >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        backgroundColor: "#ff7129",
-                        borderRadius: "20px",
-                        width: "60%",
-                      }}
-                      onClick={() => handleEdit(product)}
-                    >
-                      Update
-                    </Button>
+                    {order.phone}
                   </TableCell>
 
                   <TableCell
                     style={{ color: "white", borderBottom: "none" }}
                     align="center"
                   >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        backgroundColor: "#b70000",
-                        borderRadius: "20px",
-                        width: "60%",
-                      }}
-                      onClick={() => handleDelete(product.id)}
-                    >
-                      Delete
-                    </Button>
+                    {order.payment_method}
+                  </TableCell>
+                  <TableCell
+                    style={{ color: "white", borderBottom: "none" }}
+                    align="center"
+                  >
+                    {order.order_date}
                   </TableCell>
                 </TableRow>
               ))}

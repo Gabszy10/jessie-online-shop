@@ -56,11 +56,11 @@ function Register() {
     if (isValid()) {
       try {
         console.log(userData);
-        const res = await axios.get("http://localhost:3001/users");
+        const res = await axios.get("https://myproject03.azurewebsites.net/api/users");
         if (res.data.some((user) => userData.email === user.email)) {
           return toast.error("Email already exist , Please try again");
         }
-        await axios.post("http://localhost:3001/users", {
+        await axios.post("https://myproject03.azurewebsites.net/api/users", {
           id: uuidv4(),
           ...userData,
         });

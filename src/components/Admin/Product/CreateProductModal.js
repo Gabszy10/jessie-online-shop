@@ -41,16 +41,15 @@ export default function CreateUserModal(props) {
   const { user, isOpen, closeModal, refetch } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const [productData, setProductData] = useState({
+    title: "",
+    price: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
 
   const isValid = () => {
     setIsFormInvalid(true);
-    if (!userData.email || !userData.name || !userData.password) {
+    if (!productData.title || !productData.price) {
       return false;
     }
 
@@ -60,13 +59,13 @@ export default function CreateUserModal(props) {
   const handleSubmit = async () => {
     if (isValid()) {
       try {
-        await axios.post(
-          `https://myproject03.azurewebsites.net/api/users`,
-          userData
-        );
+        await axios.post(`https://myproject03.azurewebsites.net/api/products`, {
+          title: productData.title,
+          price: parseInt(productData.price),
+        });
         closeModal();
         refetch();
-        customToast.success("User created succesfully. ✅");
+        customToast.success("Product created succesfully. ✅");
       } catch (error) {
         customToast.error("Something went wrong, Please try again. ❌");
       }
@@ -80,7 +79,7 @@ export default function CreateUserModal(props) {
   };
 
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setProductData({ ...productData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -100,7 +99,7 @@ export default function CreateUserModal(props) {
         <Fade in={isOpen} style={{ backgroundColor: "#0f1023", color: "#FFF" }}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title" style={{ textAlign: "center" }}>
-              🖕🏽 CREATE USER 🖕🏽
+              🖕🏽 CREATE PRODUCT 🖕🏽
             </h2>
             <form form autoComplete="off" style={{ textAlign: "center" }}>
               <TextField
@@ -108,59 +107,28 @@ export default function CreateUserModal(props) {
                   style: { color: "#fff" },
                 }}
                 id="outlined-adornment"
-                label="Name"
+                label="Title"
                 variant="outlined"
                 color="primary"
                 style={{ width: "80%", marginBottom: "0.3rem" }}
                 type="text"
-                name="name"
-                value={userData.name}
+                name="title"
+                value={productData.title}
                 InputProps={{
                   style: {
                     color: "#fff",
                   },
                   classes: {
                     notchedOutline:
-                      isFormInvalid && !userData.name
+                      isFormInvalid && !productData.title
                         ? classes.notchedErrorOutline
                         : classes.notchedOutline,
                   },
                 }}
-                error={isFormInvalid && !userData.email}
+                error={isFormInvalid && !productData.title}
                 helperText={
-                  isFormInvalid && !userData.email
-                    ? "Name cannot be empty!"
-                    : " "
-                }
-                onChange={(e) => handleChange(e)}
-              />
-              <TextField
-                InputLabelProps={{
-                  style: { color: "#fff" },
-                }}
-                id="outlined-adornment"
-                label="Email"
-                variant="outlined"
-                color="primary"
-                style={{ width: "80%", marginBottom: "0.3rem" }}
-                type="email"
-                name="email"
-                value={userData.email}
-                InputProps={{
-                  style: {
-                    color: "#fff",
-                  },
-                  classes: {
-                    notchedOutline:
-                      isFormInvalid && !userData.email
-                        ? classes.notchedErrorOutline
-                        : classes.notchedOutline,
-                  },
-                }}
-                error={isFormInvalid && !userData.email}
-                helperText={
-                  isFormInvalid && !userData.email
-                    ? "Email cannot be empty!"
+                  isFormInvalid && !productData.title
+                    ? "Title cannot be empty!"
                     : " "
                 }
                 onChange={(e) => handleChange(e)}
@@ -171,28 +139,28 @@ export default function CreateUserModal(props) {
                   style: { color: "#fff" },
                 }}
                 id="outlined-adornment"
-                label="Password"
+                label="Price"
                 variant="outlined"
                 color="primary"
                 style={{ width: "80%", marginBottom: "0.3rem" }}
-                type="password"
-                name="password"
-                value={userData.password}
+                type="text"
+                name="price"
+                value={productData.price}
                 InputProps={{
                   style: {
                     color: "#fff",
                   },
                   classes: {
                     notchedOutline:
-                      isFormInvalid && !userData.password
+                      isFormInvalid && !productData.price
                         ? classes.notchedErrorOutline
                         : classes.notchedOutline,
                   },
                 }}
-                error={isFormInvalid && !userData.password}
+                error={isFormInvalid && !productData.price}
                 helperText={
-                  isFormInvalid && !userData.password
-                    ? "Password cannot be empty!"
+                  isFormInvalid && !productData.price
+                    ? "Price cannot be empty!"
                     : " "
                 }
                 onChange={(e) => handleChange(e)}

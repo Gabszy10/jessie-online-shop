@@ -37,24 +37,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UpdateProductModal(props) {
-  const { product, isOpen, closeModal, refetch } = props;
+export default function CreateOrderModal(props) {
+  const { user, isOpen, closeModal, refetch } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [productData, setproductData] = useState({
+  const [productData, setProductData] = useState({
     title: "",
     price: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
-
-  useEffect(() => {
-    if (product) {
-      setproductData({
-        title: product.title,
-        price: product.price,
-      });
-    }
-  }, [product]);
 
   const isValid = () => {
     setIsFormInvalid(true);
@@ -68,16 +59,13 @@ export default function UpdateProductModal(props) {
   const handleSubmit = async () => {
     if (isValid()) {
       try {
-        await axios.put(
-          `https://myproject03.azurewebsites.net/api/products/${product.id}`,
-          {
-            title: productData.title,
-            price: parseInt(productData.price),
-          }
-        );
+        await axios.post(`https://myproject03.azurewebsites.net/api/products`, {
+          title: productData.title,
+          price: parseInt(productData.price),
+        });
         closeModal();
         refetch();
-        customToast.success("product updated succesfully. ✅");
+        customToast.success("Product created succesfully. ✅");
       } catch (error) {
         customToast.error("Something went wrong, Please try again. ❌");
       }
@@ -91,7 +79,7 @@ export default function UpdateProductModal(props) {
   };
 
   const handleChange = (e) => {
-    setproductData({ ...productData, [e.target.name]: e.target.value });
+    setProductData({ ...productData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -111,7 +99,7 @@ export default function UpdateProductModal(props) {
         <Fade in={isOpen} style={{ backgroundColor: "#0f1023", color: "#FFF" }}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title" style={{ textAlign: "center" }}>
-              🖕🏽 UPDATE PRODUCT 🖕🏽
+              🖕🏽 CREATE PRODUCT 🖕🏽
             </h2>
             <form form autoComplete="off" style={{ textAlign: "center" }}>
               <TextField
@@ -145,6 +133,7 @@ export default function UpdateProductModal(props) {
                 }
                 onChange={(e) => handleChange(e)}
               />
+
               <TextField
                 InputLabelProps={{
                   style: { color: "#fff" },

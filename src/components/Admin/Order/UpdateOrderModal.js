@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UpdateProductModal(props) {
+export default function UpdateOrderModal(props) {
   const { product, isOpen, closeModal, refetch } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);

@@ -8,7 +8,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import toast from "../customToast";
 import { users } from "../data/db.json";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
