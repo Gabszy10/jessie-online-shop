@@ -104,7 +104,10 @@ const Product = (props) => {
         <CardMedia
           className={classes.media}
           image={
-            require(`../assets/images/products/${props.product.img}`).default
+            props.product.img
+              ? require(`../assets/images/products/${props.product.img}`)
+                  .default
+              : null
           }
           title={props.product.title}
         />

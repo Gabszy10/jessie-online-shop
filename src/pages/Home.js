@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Product from "../components/Product";
 import Slider from "../components/Slider";
-import { products } from "../data/db.json";
 import { Container } from "@material-ui/core";
+import axios from "axios";
+import customToast from "../customToast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  const fetchAllProducts = async () => {
+    try {
+      const res = await axios.get(
+        "https://myproject03.azurewebsites.net/api/products"
+      );
+
+      if (res) {
+        setProducts(res.data);
+      }
+    } catch (error) {
+      customToast.error("Something went wrong, Please try again. ❌");
+    }
+  };
 
   return (
     <>
