@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Tabs, Tab, AppBar, Box, Grid } from "@material-ui/core";
+import { Container, Box, Grid } from "@material-ui/core";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import WelcomeImage from "../components/WelcomeImage";
@@ -55,6 +55,7 @@ function Auth() {
                 <div style={{ textAlign: "center", marginTop: "1rem" }}>
                   <img
                     src={logo}
+                    alt="HAHA"
                     height="100"
                     width="150"
                     style={{

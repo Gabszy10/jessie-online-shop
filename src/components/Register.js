@@ -8,7 +8,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,10 +59,7 @@ function Register() {
         if (res.data.some((user) => userData.email === user.email)) {
           return toast.error("Email already exist , Please try again");
         }
-        await axios.post("https://myproject03.azurewebsites.net/api/users", {
-          id: uuidv4(),
-          ...userData,
-        });
+        await axios.post("https://myproject03.azurewebsites.net/api/users", userData);
         setUserData({
           name: "",
           email: "",

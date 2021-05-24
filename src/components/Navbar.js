@@ -7,15 +7,13 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { toast } from "react-toastify";
-
-const userStorage = localStorage.getItem("user") || undefined;
+import customToast from "../customToast";
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -97,10 +95,11 @@ const Navbar = () => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   useEffect(() => {
+    const userStorage = localStorage.getItem("user") || undefined;
     if (userStorage) {
       setUser(userStorage);
     }
-  }, [userStorage]);
+  }, []);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -130,7 +129,7 @@ const Navbar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => toast.success("This feature is coming soon!")}>
+      <MenuItem onClick={() => customToast.success("This feature is coming soon! 🎅")}>
         Profile
       </MenuItem>
       <MenuItem

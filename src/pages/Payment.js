@@ -82,7 +82,7 @@ export default function Payment() {
   });
   const [payment, setPayment] = useState(undefined);
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
+  // const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const cartStorage = JSON.parse(localStorage.getItem("cart")) || [];
@@ -138,8 +138,8 @@ export default function Payment() {
   };
 
   const computeTotal = (items) => {
-    const getTotal = items.reduce((n, { price, qty }) => n + price * qty, 0);
-    setTotal(getTotal);
+    // const getTotal = items.reduce((n, { price, qty }) => n + price * qty, 0);
+    // setTotal(getTotal);
   };
 
   return (

@@ -151,7 +151,6 @@ export default function Checkout() {
                   style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="receiver"
-                  helperText=" "
                   InputProps={{
                     style: {
                       color: "#fff",
@@ -183,7 +182,6 @@ export default function Checkout() {
                   style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="phone"
-                  helperText=" "
                   InputProps={{
                     style: {
                       color: "#fff",
@@ -215,7 +213,6 @@ export default function Checkout() {
                   style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="address"
-                  helperText=" "
                   InputProps={{
                     style: {
                       color: "#fff",
@@ -247,7 +244,6 @@ export default function Checkout() {
                   style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="city"
-                  helperText=" "
                   InputProps={{
                     style: {
                       color: "#fff",
@@ -279,7 +275,6 @@ export default function Checkout() {
                   style={{ width: "80%", marginBottom: "0.4rem" }}
                   type="text"
                   name="zip"
-                  helperText=" "
                   InputProps={{
                     style: {
                       color: "#fff",

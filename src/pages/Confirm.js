@@ -54,7 +54,7 @@ export default function Confirm(props) {
 
   useEffect(() => {
     fetchOrder();
-  }, []);
+  });
 
   const fetchOrder = async () => {
     try {

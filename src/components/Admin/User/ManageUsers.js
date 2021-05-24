@@ -34,8 +34,6 @@ const useStyles = makeStyles({
 
 export default function ManageUsers({ pages }) {
   const classes = useStyles();
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
   const [users, setUsers] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState("");

@@ -1,6 +1,5 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Paper, Button, Container } from "@material-ui/core";
 
 function Slider(props) {
   var items = [
@@ -20,14 +19,16 @@ function Slider(props) {
 
   return (
     // <Container >
-      <Carousel>
-        {items.map((item, i) => (
-          <img
-            src={item.url}
-            style={{ width: "100%", objectFit: "cover", maxHeight: "280px" }}
-          />
-        ))}
-      </Carousel>
+    <Carousel>
+      {items.map((item, i) => (
+        <img
+          key={i}
+          alt="Slider"
+          src={item.url}
+          style={{ width: "100%", objectFit: "cover", maxHeight: "280px" }}
+        />
+      ))}
+    </Carousel>
     // </Container>
   );
 }

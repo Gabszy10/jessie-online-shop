@@ -8,11 +8,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import customToast from "../../../customToast";
-import { Button, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import bg from "../../../assets/images/login-bg.jpg";
 import axios from "axios";
-import UpdateProductModal from "./UpdateOrderModal";
-import CreateProductModal from "./CreateOrderModal";
 
 const useStyles = makeStyles({
   table: {
@@ -34,12 +32,7 @@ const useStyles = makeStyles({
 
 export default function ManageOrders({ pages }) {
   const classes = useStyles();
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
   const [products, setProducts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [action, setAction] = useState("");
-  const [productToUpdate, setproductToUpdate] = useState();
 
   useEffect(() => {
     fetchOrders();
@@ -55,44 +48,6 @@ export default function ManageOrders({ pages }) {
       }
     } catch (error) {
       customToast.error("Something went wrong, Please try again. ❌");
-    }
-  };
-
-  const handleCreate = () => {
-    setAction("CREATE");
-    setIsOpen(true);
-  };
-
-  const handleEdit = (product) => {
-    setAction("EDIT");
-    setproductToUpdate(product);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setAction("");
-    setIsOpen(false);
-  };
-
-  const renderModal = () => {
-    if (action === "EDIT") {
-      return (
-        <UpdateProductModal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          product={productToUpdate}
-          refetch={fetchOrders}
-        />
-      );
-    } else if (action === "CREATE") {
-      return (
-        <CreateProductModal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          product={productToUpdate}
-          refetch={fetchOrders}
-        />
-      );
     }
   };
 
@@ -211,7 +166,6 @@ export default function ManageOrders({ pages }) {
               ))}
             </TableBody>
           </Table>
-          {renderModal()}
         </TableContainer>
       </div>
     </Container>

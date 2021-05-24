@@ -1,13 +1,20 @@
+import { Grid } from "@material-ui/core";
 import React from "react";
+import ManageButton from "../components/Admin/ManageButton";
 
 function AdminHome() {
   return (
-    <div style={{ color: "white" }}>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere atque
-      modi saepe molestiae quas nisi eaque, sunt, harum fugit numquam
-      perspiciatis possimus odio ducimus veritatis provident, nesciunt
-      repudiandae inventore ab.
-    </div>
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={6} md={4}>
+        <ManageButton title="Manage Users" to="/admin/users" />
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <ManageButton title="Manage Products" to="/admin/products" />
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <ManageButton title="Manage Orders" to="/admin/orders" />
+      </Grid>
+    </Grid>
   );
 }
 

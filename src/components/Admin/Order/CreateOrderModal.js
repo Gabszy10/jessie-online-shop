@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "600px",
     backgroundColor: "#0f1023",
     marginRight: "-5%",
-    backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     borderRadius: "20px",
     boxShadow: theme.shadows[5],
@@ -38,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateOrderModal(props) {
-  const { user, isOpen, closeModal, refetch } = props;
+  const { isOpen, closeModal, refetch } = props;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const [productData, setProductData] = useState({
     title: "",
     price: "",
@@ -75,7 +74,7 @@ export default function CreateOrderModal(props) {
   const handleClose = () => {
     setIsFormInvalid(false);
     closeModal();
-    setOpen(false);
+    // setOpen(false);
   };
 
   const handleChange = (e) => {

@@ -133,6 +133,7 @@ export default function CartTable({ pages }) {
                       src={require(`../assets/images/products/${row.img}`).default}
                       height="75"
                       width="80"
+                      alt="product"
                       style={{ objectFit: "cover" }}
                     />
                   </TableCell>

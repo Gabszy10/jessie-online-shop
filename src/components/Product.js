@@ -84,7 +84,7 @@ const Product = (props) => {
     const userStorage = localStorage.getItem("user") || undefined;
     if (!userStorage) {
       history.push("/login");
-      return toast.error("You must be logged in to perform this action");
+      return toast.error("You must be logged in to perform this action. ❌");
     }
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const index = cart.findIndex((item) => item.id === product.id);

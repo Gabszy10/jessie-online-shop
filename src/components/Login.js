@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -7,7 +7,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import toast from "../customToast";
-import { users } from "../data/db.json";
+import axios from "axios";
+import customToast from "../customToast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +41,24 @@ function Login() {
     password: "",
   });
   const [isFormInvalid, setIsFormInvalid] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get(
+        "https://myproject03.azurewebsites.net/api/users"
+      );
+      if (res.data) {
+        setUsers(res.data);
+      }
+    } catch (error) {
+      customToast.error("Something went wrong, Please try again. ❌");
+    }
+  };
 
   const isValid = () => {
     setIsFormInvalid(true);
@@ -57,7 +76,11 @@ function Login() {
         if (found[0].password === userData.password) {
           localStorage.setItem("user", JSON.stringify(found[0]));
           toast.success("Logged in succesfully");
-          window.location.href = "/";
+          if (found[0].isAdmin) {
+            window.location.href = "/admin";
+          } else {
+            window.location.href = "/";
+          }
         } else {
           toast.error("Email and Password does not match ❌");
         }
@@ -150,7 +173,7 @@ function Login() {
 
           <h3
             style={{ cursor: "pointer", color: "#29d7ff" }}
-            onClick={() => toast.success("Coming soon !")}
+            onClick={() => toast.success("Coming soon ! 🎅")}
           >
             Forgot password?
           </h3>
