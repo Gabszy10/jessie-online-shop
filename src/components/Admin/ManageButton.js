@@ -10,8 +10,10 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 400,
     margin: "auto",
+    borderRadius: "15px",
+    boxShadow: "6px 10px 13px -3px rgba(0,0,0,0.75)",
   },
   media: {
     height: 0,
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ManageButton(props) {
   const classes = useStyles();
   const history = useHistory();
-  
+
   return (
     <Card className={classes.root}>
       <CardMedia
