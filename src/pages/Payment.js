@@ -114,19 +114,23 @@ export default function Payment() {
         mm = "0" + mm;
       }
       today = mm + "-" + dd + "-" + yyyy;
-      const orderNumber = uuidv4();
-      await axios.post("https://myproject03.azurewebsites.net/api/orders", {
-        user_id: user.id,
-        order_date: today,
-        receiver: userData.receiver,
-        phone: userData.phone,
-        address: `${userData.address} ${userData.city} ${userData.zip}`,
-        payment_method: payment,
-      });
-      toast.success("Order processed succesfully");
-      localStorage.clear("user_cart");
-      localStorage.clear("user_info");
-      history.push(`/order/confirm/${orderNumber}`);
+      const res = await axios.post(
+        "https://myproject03.azurewebsites.net/api/orders",
+        {
+          user_id: user.id,
+          order_date: today,
+          receiver: userData.receiver,
+          phone: userData.phone,
+          address: `${userData.address} ${userData.city} ${userData.zip}`,
+          payment_method: payment,
+        }
+      );
+      if (res) {
+        toast.success("Order processed succesfully");
+        localStorage.clear("user_cart");
+        localStorage.clear("user_info");
+        history.push(`/order/confirm/${res.data.id}`);
+      }
     } catch (error) {
       toast.error("Something went wrong, Please try again.");
     }
