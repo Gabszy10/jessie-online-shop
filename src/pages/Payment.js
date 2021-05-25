@@ -116,7 +116,6 @@ export default function Payment() {
       today = mm + "-" + dd + "-" + yyyy;
       const orderNumber = uuidv4();
       await axios.post("https://myproject03.azurewebsites.net/api/orders", {
-        id: orderNumber,
         user_id: user.id,
         order_date: today,
         receiver: userData.receiver,

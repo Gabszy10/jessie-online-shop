@@ -58,22 +58,27 @@ export default function CreateUserModal(props) {
   const isValid = () => {
     setIsFormInvalid(true);
     var re = /\S+@\S+\.\S+/;
+    let error = false;
     if (!userData.password.value || !userData.name.value) {
-      return false;
+      error = true;
     }
     if (!userData.email.value) {
       setUserData({
         ...userData,
         email: { ...userData.email, error: "Email cannot be empty!" },
       });
-      return false;
+      error = true;
     }
 
-    if (!re.test(userData.email.value)) {
+    if (!re.test(userData.email.value) && userData.email.value !== "") {
       setUserData({
         ...userData,
         email: { ...userData.email, error: "Email must be valid email!" },
       });
+      error = true;
+    }
+
+    if (error) {
       return false;
     }
 
