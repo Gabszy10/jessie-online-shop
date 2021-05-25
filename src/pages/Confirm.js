@@ -54,14 +54,21 @@ export default function Confirm(props) {
 
   useEffect(() => {
     fetchOrder();
-  });
+  }, []);
 
   const fetchOrder = async () => {
     try {
       const res = await axios.get(
-        `https://myproject03.azurewebsites.net/api/orders/${props.match.params.id}`
+        `https://myproject03.azurewebsites.net/api/orders`
       );
-      setOrderDetails(res.data);
+
+      if (res) {
+        const found = res.data.filter(
+          (item) => item.id === parseInt(props.match.params.id)
+        );
+        console.log(found);
+        setOrderDetails(found[0]);
+      }
     } catch (error) {}
   };
 
@@ -104,7 +111,7 @@ export default function Confirm(props) {
                           align="center"
                           width="50%"
                         >
-                          JS-{orderDetails.id.substr(0, 5)}
+                          JS-{orderDetails.id}00
                         </TableCell>
                       </TableRow>
                       <TableRow>
